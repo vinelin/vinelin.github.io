@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Welcome to Hux Blog"
+title:      "Blog is working!"
 subtitle:   " \"Hello World\""
 date:       2018-09-29 00:00:00
 author:     "Vinelin"
@@ -19,5 +19,6 @@ tags:
 
 ## 感谢
 
-*[Huangxuan](https://github.com/Huxpro/huxpro.github.io)
-*[GitHub Pages](https://pages.github.com/) *[Jekyll](http://jekyllrb.com/)
+* [Huangxuan](https://github.com/Huxpro/huxpro.github.io)
+* [GitHub Pages](https://pages.github.com/)
+* [Jekyll](http://jekyllrb.com/)
