@@ -5,14 +5,14 @@ header-img: img/home-bg.jpg
 email: 15708136497lqd@gmail.com
 description: "自说自话"
 keyword: "灵性东,vinelin"
-url: "http://vinelin.github.io"              # your host, for absolute URL6
+url: "https://vinelin.github.io"              # your host, for absolute URL6
 baseurl: ""
 
 
 
 # SNS settings
 RSS: false
-# weibo_username:
+weibo_username:
 # zhihu_username:
 github_username:    vinelin
 #twitter_username:
@@ -79,9 +79,9 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 
 
 # Friends
-friends: [
-    {
-        title: "",
-        href: ""
-    }
-]
+# friends: [
+#     {
+#         title: "",
+#         href: ""
+#     }
+# ]
