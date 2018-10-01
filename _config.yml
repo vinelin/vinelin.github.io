@@ -1,5 +1,5 @@
 ﻿# Site settings
-title: Vine Lin's Blog
+title: Vine Blog
 SEOTitle: 灵性东博客 | Vinelin Blog
 header-img: img/home-bg.jpg
 email: 15708136497lqd@gmail.com
@@ -12,10 +12,10 @@ baseurl: ""
 
 # SNS settings
 RSS: false
-weibo_username:
-# zhihu_username:
+tencent_username: true
+email_username: barnacleboy@qq.com
 github_username:    vinelin
-#twitter_username:
+steam_username: thbob
 
 
 
@@ -66,15 +66,15 @@ ga_domain:
 
 
 # Sidebar settings
-sidebar: false                           # whether or not using Sidebar.
+sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "Unjust but not evil speculator."
-sidebar-avatar:       # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar:   /img/avatar.jpg    # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
 # Featured Tags
 featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+featured-condition-size: 0              # A tag will be featured if the size of it is more than this condition value
 
 
 
