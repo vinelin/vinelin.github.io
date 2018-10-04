@@ -86,22 +86,18 @@ tags:
     }
     };`
 
-当zero执行一次时即zero(f);时，返回值为`function (x) {
-        return x;
-    }`
+当zero执行一次时即zero(f);时，返回值为`function (x) {return x;}`
 
 若把返回值再次执行即zero(f)(x);返回值为x;
 - - -
 再来看one函数
-` var one = function (f) {
+`var one = function (f) {
     return function (x) {
         return f(x);
     }
     };`
 
-当one执行一次时即one(f);返回值为`function (x) {
-        return f(x);
-    }`
+当one执行一次时即one(f);返回值为`function (x) {return f(x);}`
 
 若把返回值再次执行即one(f)(x);返回值为f(x);
 这说明了执行了一次函数f(x)而f为第一次执行传入的参数而x为继续执行传入的参数。
