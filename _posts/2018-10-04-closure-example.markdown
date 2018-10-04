@@ -2,9 +2,9 @@
 layout:     post
 title:      "JavaScript 关于闭包的有趣例子"
 subtitle:   "不用数字进行计算"
-date:       2018-09-29 00:00:00
+date:       2018-10-04 09:00:00
 author:     "Vinelin"
-header-img: "img/post-bg-1.jpg"
+header-img: "img/post-bg-2.jpg"
 tags:
     - JavaScript
     - 想法
@@ -79,12 +79,7 @@ tags:
 ## 个人分析
 说这是一个程序问题，不如说是一个逻辑问题。
 首先我们要知道下面函数中的f和x可有可无,为了与上面执行结果联系起来,你不妨把x都看为空,即没有传入参数.
-我们来看zero函数
-` var zero = function (f) {
-    return function (x) {
-        return x;
-    }
-    };`
+我们来看zero函数`var zero = function (f) {return function (x) {return x;}};`
 
 当zero执行一次时即zero(f);时，返回值为`function (x) {return x;}`
 
@@ -152,7 +147,8 @@ add(one,one)也就是two函数的返回值为
                 return one(p)(p());
             }`
 
-返回值再次执行也就是`function () {
+返回值再次执行也就是
+`function () {
                 return one(p)(p());
             }();`
 
