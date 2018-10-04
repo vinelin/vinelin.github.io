@@ -73,7 +73,7 @@ tags:
     print 5 times
     print 5 times
     print 5 times
-    
+
 ---
 
 ## 个人分析
@@ -85,9 +85,11 @@ tags:
         return x;
     }
     };`
-当zero执行一次时即zero(f);时，返回值为``function (x) {
+
+当zero执行一次时即zero(f);时，返回值为`function (x) {
         return x;
-    }``
+    }`
+
 若把返回值再次执行即zero(f)(x);返回值为x;
 - - -
 再来看one函数
@@ -96,6 +98,7 @@ tags:
         return f(x);
     }
     };`
+
 当one执行一次时即one(f);返回值为`function (x) {
         return f(x);
     }`
