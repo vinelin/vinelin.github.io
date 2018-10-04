@@ -98,6 +98,7 @@ tags:
 当one执行一次时即one(f);返回值为`function (x) {
         return f(x);
     }`
+    
 若把返回值再次执行即one(f)(x);返回值为f(x);
 这说明了执行了一次函数f(x)而f为第一次执行传入的参数而x为继续执行传入的参数。
 最关键也是最奇妙的是加法函数的定义:
@@ -109,6 +110,7 @@ tags:
             }
         }
     }
+
 根据这个函数的定义来具体看看`var two = add(one,one);`
 让我们回顾一下one(f);得到的是一个函数，该函数的返回值为f(x);one(f)(x)得到f(x);
 现在 m==one,n==one;
@@ -119,6 +121,7 @@ add(one,one)也就是two函数的返回值为
                 return one(f)(one(f)(x));
             }
         }
+
 注意一下这里`return one(f)(one(f)(x));`
 对于一个one函数来说传入参数第一次为f,第二次为one(f)(x);
 对于第二个one函数来说传入参数第一次为f,第二次为x;
@@ -143,7 +146,9 @@ add(one,one)也就是two函数的返回值为
             return one(p)(p());
         }
     }
-最后得到`function () {
+
+最后得到
+`function () {
                 return one(p)(p());
             }`
 
