@@ -146,15 +146,18 @@ add(one,one)也就是two函数的返回值为
 最后得到`function () {
                 return one(p)(p());
             }`
+
 返回值再次执行也就是`function () {
                 return one(p)(p());
             }();`
+
 得到 one(p)(p());
 也就是  p(p());
 内部的p()先执行p函数输出*print 2 times*,返回undefined;
 然后外部变成了p(undefined);可以看成p();再次执行p函数输出*print 2 times*
 
 以此类推可以知道为什么例子里three(f)()会输出三次,five(f)()会输出五次;
+
 ---
 
 ## 问题出处
