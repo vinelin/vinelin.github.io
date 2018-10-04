@@ -16,8 +16,8 @@ tags:
 "很久很久以前，有个叫阿隆佐·邱奇的帅哥，发现只需要用函数，就可以用计算机实现运算，而不需要0、1、2、3这些数字和+、-、\*、这些符号。"
 
 代码如下:
-    'use strict';
 
+    'use strict';
     // 定义数字0:
     var zero = function (f) {
     return function (x) {
@@ -63,6 +63,98 @@ tags:
     console.log('print 5 times');
     }))();
 
+运行结果如下:
+
+    print 3 times
+    print 3 times
+    print 3 times
+    print 5 times
+    print 5 times
+    print 5 times
+    print 5 times
+    print 5 times
+---
+
+## 个人分析
+说这是一个程序问题，不如说是一个逻辑问题。
+首先我们要知道下面函数中的f和x可有可无,为了与上面执行结果联系起来,你不妨把x都看为空,即没有传入参数.
+我们来看zero函数
+` var zero = function (f) {
+    return function (x) {
+        return x;
+    }
+    };`
+当zero执行一次时即zero(f);时，返回值为``function (x) {
+        return x;
+    }``
+若把返回值再次执行即zero(f)(x);返回值为x;
+- - -
+再来看one函数
+` var one = function (f) {
+    return function (x) {
+        return f(x);
+    }
+    };`
+当one执行一次时即one(f);返回值为`function (x) {
+        return f(x);
+    }`
+若把返回值再次执行即one(f)(x);返回值为f(x);
+这说明了执行了一次函数f(x)而f为第一次执行传入的参数而x为继续执行传入的参数。
+最关键也是最奇妙的是加法函数的定义:
+
+    function add(n, m) {
+        return function (f) {
+            return function (x) {
+                return m(f)(n(f)(x));
+            }
+        }
+    }
+根据这个函数的定义来具体看看`var two = add(one,one);`
+让我们回顾一下one(f);得到的是一个函数，该函数的返回值为f(x);one(f)(x)得到f(x);
+现在 m==one,n==one;
+add(one,one)也就是two函数的返回值为
+
+       function (f) {
+            return function (x) {
+                return one(f)(one(f)(x));
+            }
+        }
+注意一下这里`return one(f)(one(f)(x));`
+对于一个one函数来说传入参数第一次为f,第二次为one(f)(x);
+对于第二个one函数来说传入参数第一次为f,第二次为x;
+上文已经得出了执行one(f)(x);会得到f(x);
+所以代码其实可以看成
+
+       function (f) {
+            return function (x) {
+                return one(f)(f(x));
+            }
+        }
+
+这时我们如例子里面给three和five传递一个函数参数一样，给two传递一个函数参数`function () {console.log('print 2 times')`
+把这个函数记为p函数,p()为输出*print 2 times*
+执行two(p)();
+由于第二次没有传入参数,x为空。
+先看two(p);会发生什么
+代码就变成了
+
+    function (p) {
+        return function () {
+            return one(p)(p());
+        }
+    }
+最后得到`function () {
+                return one(p)(p());
+            }`
+返回值再次执行也就是`function () {
+                return one(p)(p());
+            }();`
+得到 one(p)(p());
+也就是  p(p());
+内部的p()先执行p函数输出*print 2 times*,返回undefined;
+然后外部变成了p(undefined);可以看成p();再次执行p函数输出*print 2 times*
+
+以此类推可以知道为什么例子里three(f)()会输出三次,five(f)()会输出五次;
 ---
 
 ## 问题出处
