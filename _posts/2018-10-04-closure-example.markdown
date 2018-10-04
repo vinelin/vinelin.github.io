@@ -73,6 +73,7 @@ tags:
     print 5 times
     print 5 times
     print 5 times
+    
 ---
 
 ## 个人分析
@@ -98,7 +99,7 @@ tags:
 当one执行一次时即one(f);返回值为`function (x) {
         return f(x);
     }`
-    
+
 若把返回值再次执行即one(f)(x);返回值为f(x);
 这说明了执行了一次函数f(x)而f为第一次执行传入的参数而x为继续执行传入的参数。
 最关键也是最奇妙的是加法函数的定义:
