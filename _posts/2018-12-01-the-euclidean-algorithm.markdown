@@ -59,7 +59,7 @@ A=6, B=0
 * A ≠0
 * B =0，GCD(6,0)=6
 
-######所以我们得出
+**所以我们得出**
 
 GCD(270,192) = GCD(192,78) = GCD(78,36) = GCD(36,6) = GCD(6,0) = 6
 
@@ -90,7 +90,7 @@ GCD(A,0)=A的证明如下：
 
  为了证明 **GCD(A,B)=GCD(B,R)**，我们首先需要知道 **GCD(A,B)=GCD(B,A-B)**。
 
- ![GCD(A,B)=GCD(B,A-B)](img/euclidean/1.png)
+ ![GCD(A,B)=GCD(B,A-B)](/img/euclidean/1.png)
 
 假设我们有三个整数 **A**，**B** 和 **C** 而且 **A-B=C**。
 
@@ -110,7 +110,7 @@ A-B=C 可以得出：
 
 此证明的图示如下：
 
- ![X⋅GCD(A,B) - Y⋅GCD(A,B) = C](img/euclidean/2.png)
+ ![X⋅GCD(A,B) - Y⋅GCD(A,B) = C](/img/euclidean/2.png)
 
  **证明GCD(B,C)可以整除A**
 
@@ -128,7 +128,7 @@ A-B=C 可以得出：
 
 此证明的图示如下：
 
- ![(M + N)⋅GCD(B,C) = A](img/euclidean/3.png)
+ ![(M + N)⋅GCD(B,C) = A](/img/euclidean/3.png)
 
 **下面证明GCD(A,B)=GCD(A,A-B)**
 
@@ -152,7 +152,7 @@ A-B=C 可以得出：
 
 **GCD(A,B)=GCD(B,A-B)**
 
- ![GCD(A,B)=GCD(B,A-B)](img/euclidean/1.png)
+ ![GCD(A,B)=GCD(B,A-B)](/img/euclidean/1.png)
 
  **下面证明GCD(A,B) = GCD(B,R)**
 
