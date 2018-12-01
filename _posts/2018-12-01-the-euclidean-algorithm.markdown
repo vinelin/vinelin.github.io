@@ -2,7 +2,7 @@
 layout:     post
 title:      "【个人翻译】欧几里得算法原理"
 subtitle:   "辗转相除法"
-date:       2018-12-01 09:00:00
+date:       2018-11-30 09:00:00
 author:     "Vinelin"
 header-img: "img/post-bg-2.jpg"
 tags:
@@ -65,7 +65,7 @@ GCD(270,192) = GCD(192,78) = GCD(78,36) = GCD(36,6) = GCD(6,0) = 6
 
 **GCD(270,192) = 6**
 
-##理解欧几里得算法
+## 理解欧几里得算法
 
 欧几里得算法使用了以下这些性质：
 
