@@ -1,8 +1,7 @@
 @font-face {
-  font-family: ZpixOnline;
-  src: url("https://cdn.jsdelivr.net/gh/vinelin/blog-resource@master/zpix.woff2?zpix--online"),;
+  font-family: Zpix;
+  src: url("zpix-font/zpix.woff");
 }
-
 .theme-black body {
   color: #fff;
   background-color: #3a3e4a;
@@ -26,7 +25,7 @@
 body {
   font-weight: 400;
   font-size: 14px;
-  font-family: ZpixOnline, ZpixLocal, sans-serif;
+  font-family: Zpix, sans-serif;
   line-height: 1.725;
   text-rendering: geometricPrecision;
 }
