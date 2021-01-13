@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh" class="theme-white">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        神舆
+    </title>
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+	<link href="//unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body id="bodyx" path="archives/2018/closure-example/">
+    <div class="hd posts">
+    <a class="back" href="javascript:void(0);"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            JavaScript 关于闭包的有趣例子
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <h2 id="脑洞大开–使用函数进行计算"><a href="#脑洞大开–使用函数进行计算" class="headerlink" title="脑洞大开–使用函数进行计算"></a>脑洞大开–使用函数进行计算</h2><p>最近在学习JavaScript，在闭包的讲解环节遇到了这样的一个例子。<br>“很久很久以前，有个叫阿隆佐·邱奇的帅哥，发现只需要用函数，就可以用计算机实现运算，而不需要0、1、2、3这些数字和+、-、*、这些符号。”</p>
+<p>代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"><span class="comment">// 定义数字0:</span></span><br><span class="line"><span class="keyword">var</span> zero = <span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义数字1:</span></span><br><span class="line"><span class="keyword">var</span> one = <span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> f(x);</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义加法:</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">n, m</span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m(f)(n(f)(x));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 计算数字2 = 1 + 1:</span></span><br><span class="line"><span class="keyword">var</span> two = add(one, one);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算数字3 = 1 + 2:</span></span><br><span class="line"><span class="keyword">var</span> three = add(one, two);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算数字5 = 2 + 3:</span></span><br><span class="line"><span class="keyword">var</span> five = add(two, three);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 你说它是3就是3，你说它是5就是5，你怎么证明？</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 呵呵，看这里:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 给3传一个函数,会打印3次:</span></span><br><span class="line">(three(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;print 3 times&#x27;</span>);</span><br><span class="line">&#125;))();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 给5传一个函数,会打印5次:</span></span><br><span class="line">(five(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;print 5 times&#x27;</span>);</span><br><span class="line">&#125;))();</span><br></pre></td></tr></table></figure>
+<p>运行结果如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span> 3 <span class="built_in">times</span></span><br><span class="line"><span class="built_in">print</span> 3 <span class="built_in">times</span></span><br><span class="line"><span class="built_in">print</span> 3 <span class="built_in">times</span></span><br><span class="line"><span class="built_in">print</span> 5 <span class="built_in">times</span></span><br><span class="line"><span class="built_in">print</span> 5 <span class="built_in">times</span></span><br><span class="line"><span class="built_in">print</span> 5 <span class="built_in">times</span></span><br><span class="line"><span class="built_in">print</span> 5 <span class="built_in">times</span></span><br><span class="line"><span class="built_in">print</span> 5 <span class="built_in">times</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="个人分析"><a href="#个人分析" class="headerlink" title="个人分析"></a>个人分析</h2><p>说这是一个程序问题，不如说是一个逻辑问题。<br>首先我们要知道下面函数中的f和x可有可无,为了与上面执行结果联系起来,你不妨把x都看为空,即没有传入参数.<br>我们来看zero函数<code>var zero = function (f) &#123;return function (x) &#123;return x;&#125;&#125;;</code></p>
+<p>当zero执行一次时即zero(f);时，返回值为<code>function (x) &#123;return x;&#125;</code></p>
+<p>若把返回值再次执行即zero(f)(x);返回值为x;</p>
+<hr>
+<p>再来看one函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> one = <span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> f(x);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<p>当one执行一次时即one(f);返回值为<code>function (x) &#123;return f(x);&#125;</code></p>
+<p>若把返回值再次执行即one(f)(x);返回值为f(x);<br>这说明了执行了一次函数f(x)而f为第一次执行传入的参数而x为继续执行传入的参数。<br>最关键也是最奇妙的是加法函数的定义:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">n, m</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> m(f)(n(f)(x));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据这个函数的定义来具体看看<code>var two = add(one,one);</code><br>让我们回顾一下one(f);得到的是一个函数，该函数的返回值为f(x);one(f)(x)得到f(x);<br>现在 m==one,n==one;<br>add(one,one)也就是two函数的返回值为</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> one(f)(one(f)(x));</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>注意一下这里<code>return one(f)(one(f)(x));</code><br>对于一个one函数来说传入参数第一次为f,第二次为one(f)(x);<br>对于第二个one函数来说传入参数第一次为f,第二次为x;<br>上文已经得出了执行one(f)(x);会得到f(x);<br>所以代码其实可以看成</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> one(f)(f(x));</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>这时我们如例子里面给three和five传递一个函数参数一样，给two传递一个函数参数<code>function () &#123;console.log(&#39;print 2 times&#39;)</code><br>把这个函数记为p函数,p()为输出<code>print 2 times</code><br>执行two(p)();<br>由于第二次没有传入参数,x为空。<br>先看two(p);会发生什么<br>代码就变成了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">p</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> one(p)(p());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后得到<br><code>function () &#123;                 return one(p)(p());             &#125;</code></p>
+<p>返回值再次执行也就是<br><code>function () &#123;                 return one(p)(p());             &#125;();</code></p>
+<p>得到 one(p)(p());<br>也就是  p(p());<br>内部的p()先执行p函数输出<em>print 2 times</em>,返回undefined;<br>然后外部变成了p(undefined);可以看成p();再次执行p函数输出<em>print 2 times</em></p>
+<p>以此类推可以知道为什么例子里three(f)()会输出三次,five(f)()会输出五次;</p>
+<hr>
+<h2 id="问题出处"><a href="#问题出处" class="headerlink" title="问题出处"></a>问题出处</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143449934543461c9d5dfeeb848f5b72bd012e1113d15000#0">廖雪峰老师JavaScript教程-闭包</a></li>
+</ul>
+
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+<button type="button" class="nes-btn is-success scroll-btn">
+<span><</s>
+</button>
+    <div class="footer" id="footer">
+	<div id="app"></div>
+    <p>Copyright © Vine 2021.Theme by <a class="flink" target="_blank" rel="noopener" href="https://github.com/journey-ad/hexo-theme-geek">Geek</a>.
+		</br>
+		<label>
+			<input type="radio" class="nes-radio" id="update_style_b" name="switch" color_mode="black" />
+			<span>Black</span>
+		</label>
+		<label>
+			<input type="radio" class="nes-radio" id="update_style_w" name="switch" color_mode="white" />
+			<span>White</span>
+		</label>
+		
+		
+<script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+<script>
+  let player = new cplayer({
+    element: document.getElementById('app'),
+    playlist: [
+      {
+        src: 'https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/bgm/Start%20the%20Adventure.mp3',
+        poster: 'https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/theme/img/music_png.png',
+        name: 'Start the Adventure',
+        artist: 'Nexon',
+        lyric: '',
+        sublyric: '',
+      }
+    ],
+	volume: 0.3,
+	dropDownMenuMode: 'bottom',
+  })
+</script>	
+</p>
+
+
+</div>
+<input type="hidden" id="web_style" value="white">
+<input type="hidden" id="valine_appid" value="mtn0Lvro9W02R6bHRhiFCszQ-gzGzoHsz">
+<input type="hidden" id="valine_appKey" value="TIDLxR2BG5wKroApzi4lcVRy">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+    color: #698fca;
+}
+
+.v .vlist .vcard .vhead .vsys {
+    color: #3a3e4a;
+}
+
+.v .vlist .vcard .vh .vmeta .vat {
+    color: #638fd5;
+}
+
+.v .vlist .vcard .vhead .vnick {
+    color: #6ba1ff;
+}
+
+.v a {
+    color: #8696b1;
+}
+
+.v .vlist .vcard .vhead .vnick:hover {
+    color: #669bfc;
+}
+</style>
+	
+</body>
+
+</html>

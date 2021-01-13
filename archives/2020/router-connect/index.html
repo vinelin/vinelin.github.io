@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh" class="theme-white">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        神舆
+    </title>
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+	<link href="//unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body id="bodyx" path="archives/2020/router-connect/">
+    <div class="hd posts">
+    <a class="back" href="javascript:void(0);"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            浅谈家中路由器组网方式
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <p>本文写于更换新的路由器时，临时起意。<br>一来梳理一下路由器设置模式的差异，二来复习一下计网知识。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
+<li>光猫有两种模式，默认为<strong>路由模式</strong>（此时光猫拨号上网，另外一种为桥接模式——由连接的设备自行拨号）</li>
+<li>开启路由模式的光猫可作为下文中的<strong>一级路由</strong></li>
+<li>自行购买的路由下文中称为<strong>二级路由</strong>或<strong>副一级路由</strong></li>
+<li>一级路由默认开启<strong>DHCP</strong></li>
+<li>W为WAN口，L为LAN口</li>
+<li>子网掩码255.255.255.0</li>
+<li>图中的<strong>无线</strong>情况均可用<strong>有线</strong>替换（前提是有空闲LAN口）</li>
+</ul>
+<h2 id="情形一：直接使用一级路由"><a href="#情形一：直接使用一级路由" class="headerlink" title="情形一：直接使用一级路由"></a>情形一：直接使用一级路由</h2><p><img src="https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/img/router-connect/1.png" alt="situation one"></p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><blockquote>
+<ol>
+<li>设备在同一网络</li>
+<li>一次NAT：外网IP-&gt;192.168.1.XXX</li>
+</ol>
+</blockquote>
+<h2 id="情形二：二级路由切换为中继模式"><a href="#情形二：二级路由切换为中继模式" class="headerlink" title="情形二：二级路由切换为中继模式"></a>情形二：二级路由切换为中继模式</h2><h3 id="有线中继"><a href="#有线中继" class="headerlink" title="有线中继"></a>有线中继</h3><p><img src="https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/img/router-connect/2.png" alt="situation two-one"></p>
+<h3 id="无线中继"><a href="#无线中继" class="headerlink" title="无线中继"></a>无线中继</h3><p><img src="https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/img/router-connect/3.png" alt="situation two-two"></p>
+<h4 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h4><blockquote>
+<ol>
+<li>设备在同一网络</li>
+<li>一次NAT：外网IP-&gt;192.168.1.XXX</li>
+<li>该方式扩展了原有网络</li>
+</ol>
+</blockquote>
+<h2 id="情形三：二级路由切换为路由模式作为-二级路由（也有地方称为-无线访问点AP）"><a href="#情形三：二级路由切换为路由模式作为-二级路由（也有地方称为-无线访问点AP）" class="headerlink" title="情形三：二级路由切换为路由模式作为 二级路由（也有地方称为 无线访问点AP）"></a>情形三：二级路由切换为路由模式作为 二级路由（也有地方称为 无线访问点AP）</h2><p><img src="https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/img/router-connect/4.png" alt="situation three"></p>
+<h4 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h4><blockquote>
+<ol>
+<li>设备不在同一网络，由连接的路由决定</li>
+<li>两次NAT：外网IP-&gt;192.168.1.XXX-&gt;192.168.31.XXX</li>
+<li>该方式扩展了原有网络</li>
+</ol>
+</blockquote>
+<h2 id="情形三：二级路由切换为路由模式作为-交换机"><a href="#情形三：二级路由切换为路由模式作为-交换机" class="headerlink" title="情形三：二级路由切换为路由模式作为 交换机"></a>情形三：二级路由切换为路由模式作为 交换机</h2><p><img src="https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/img/router-connect/5.png"></p>
+<h4 id="特点-3"><a href="#特点-3" class="headerlink" title="特点"></a>特点</h4><blockquote>
+<ol>
+<li>设备在同一网络</li>
+<li>一次NAT：外网IP-&gt;192.168.1.XXX</li>
+<li>该方式扩展了原有网络</li>
+</ol>
+</blockquote>
+<h4 id="与中继模式对比"><a href="#与中继模式对比" class="headerlink" title="与中继模式对比"></a>与中继模式对比</h4><blockquote>
+<ol>
+<li>中继模式接在WAN口，交换机模式接在LAN口</li>
+<li>中继模式可进入路由器设置界面，交换机模式则不可</li>
+</ol>
+</blockquote>
+<h2 id="补充：光猫切换为桥接模式"><a href="#补充：光猫切换为桥接模式" class="headerlink" title="补充：光猫切换为桥接模式"></a>补充：光猫切换为桥接模式</h2><p>参考情形一.但一级路由消失变为ISP，二级路由变为一级路由</p>
+
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+<button type="button" class="nes-btn is-success scroll-btn">
+<span><</s>
+</button>
+    <div class="footer" id="footer">
+	<div id="app"></div>
+    <p>Copyright © Vine 2021.Theme by <a class="flink" target="_blank" rel="noopener" href="https://github.com/journey-ad/hexo-theme-geek">Geek</a>.
+		</br>
+		<label>
+			<input type="radio" class="nes-radio" id="update_style_b" name="switch" color_mode="black" />
+			<span>Black</span>
+		</label>
+		<label>
+			<input type="radio" class="nes-radio" id="update_style_w" name="switch" color_mode="white" />
+			<span>White</span>
+		</label>
+		
+		
+<script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+<script>
+  let player = new cplayer({
+    element: document.getElementById('app'),
+    playlist: [
+      {
+        src: 'https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/bgm/Start%20the%20Adventure.mp3',
+        poster: 'https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/theme/img/music_png.png',
+        name: 'Start the Adventure',
+        artist: 'Nexon',
+        lyric: '',
+        sublyric: '',
+      }
+    ],
+	volume: 0.3,
+	dropDownMenuMode: 'bottom',
+  })
+</script>	
+</p>
+
+
+</div>
+<input type="hidden" id="web_style" value="white">
+<input type="hidden" id="valine_appid" value="mtn0Lvro9W02R6bHRhiFCszQ-gzGzoHsz">
+<input type="hidden" id="valine_appKey" value="TIDLxR2BG5wKroApzi4lcVRy">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+    color: #698fca;
+}
+
+.v .vlist .vcard .vhead .vsys {
+    color: #3a3e4a;
+}
+
+.v .vlist .vcard .vh .vmeta .vat {
+    color: #638fd5;
+}
+
+.v .vlist .vcard .vhead .vnick {
+    color: #6ba1ff;
+}
+
+.v a {
+    color: #8696b1;
+}
+
+.v .vlist .vcard .vhead .vnick:hover {
+    color: #669bfc;
+}
+</style>
+	
+</body>
+
+</html>

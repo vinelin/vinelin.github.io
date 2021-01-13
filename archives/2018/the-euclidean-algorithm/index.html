@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh" class="theme-white">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        神舆
+    </title>
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+	<link href="//unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body id="bodyx" path="archives/2018/the-euclidean-algorithm/">
+    <div class="hd posts">
+    <a class="back" href="javascript:void(0);"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            【个人翻译】欧几里得算法原理
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>回想一下两个整数A和B最大公约数（the Greatest Common Divisor (GCD)）的概念：A和B的最大公约数是能同时整除A和B的最大整数。</p>
+<p>欧几里得算法是一种快速找到两个整数最大公约数（GCD）的算法。</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>使用欧几里得算法计算A和B的最大公约数，即GCD(A,B)，步骤如下：</p>
+<ul>
+<li>如果A=0，那么GCD(A,B)=B，因为GCD(0,B)=B，计算结束。</li>
+<li>如果B=0，那么GCD(A,B)=A，因为GCD(A,0)=A，计算结束。</li>
+<li>将A写成商余数形式，即(A = B⋅Q + R)。</li>
+<li>使用欧几里得算法计算GCD(B,R)，因为GCD(A,B) = GCD(B,R)</li>
+</ul>
+<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><p>寻找270和192的最大公约数：</p>
+<ul>
+<li>A=270, B=192</li>
+<li>A ≠0</li>
+<li>B ≠0</li>
+<li>使用长除法得到270/192 = 1余数为78。我们可以写成这种形式：270 = 192 * 1 +78</li>
+<li>找出GCD(192,78)，因为GCD(270,192)=GCD(192,78)。</li>
+</ul>
+<p>A=192, B=78</p>
+<ul>
+<li>A ≠0</li>
+<li>B ≠0</li>
+<li>使用长除法得到192/78 = 2余数为36。我们可以写成这种形式：192 = 78 * 2 + 36</li>
+<li>找出GCD(78,36)，因为GCD(192,78)=GCD(78,36)。</li>
+</ul>
+<p>A=78, B=36</p>
+<ul>
+<li>A ≠0</li>
+<li>B ≠0</li>
+<li>使用长除法得到78/36 = 2余数为6。我们可以写成这种形式：78 = 36 * 2 + 6</li>
+<li>找出GCD(36，6)，因为GCD(78,36)=GCD(36,6)。</li>
+</ul>
+<p>A=36, B=6</p>
+<ul>
+<li>A ≠0</li>
+<li>B ≠0</li>
+<li>使用长除法得到36/6 = 6余数为0。我们可以写成这种形式：36 = 6 * 6 + 0</li>
+<li>找出GCD(6，0)，因为GCD(36,6)=GCD(6,0)。</li>
+</ul>
+<p>A=6, B=0</p>
+<ul>
+<li>A ≠0</li>
+<li>B =0，GCD(6,0)=6</li>
+</ul>
+<p><strong>所以我们得出</strong></p>
+<p>GCD(270,192) = GCD(192,78) = GCD(78,36) = GCD(36,6) = GCD(6,0) = 6</p>
+<p><strong>GCD(270,192) = 6</strong></p>
+<h2 id="理解欧几里得算法"><a href="#理解欧几里得算法" class="headerlink" title="理解欧几里得算法"></a>理解欧几里得算法</h2><p>欧几里得算法使用了以下这些性质：</p>
+<ul>
+<li>GCD(A,0) = A</li>
+<li>GCD(0,B) = B</li>
+<li><strong>如果 A = B⋅Q + R 且 B≠0 那么 GCD(A,B) = GCD(B,R)。</strong>（Q是一个整数，R是0到B-1之间的一个数）</li>
+</ul>
+<p>前两个性质让我们能得到0与其他整数之间的最大公约数。第三个性质让我们能够解决数字更大更困难的寻找最大公约数的问题。<strong>由第三个性质，我们可以将一个较为困难的寻找最大公约数问题转换为简单的寻找最大公约数问题。</strong></p>
+<p>欧几里得算法首先通过性质三将问题简化，直到问题的条件满足性质一或性质二，从而解决问题。</p>
+<p>我们可以通过证明这些性质来理解他们。</p>
+<p>GCD(A,0)=A的证明如下：</p>
+<ul>
+<li><p>可以整除A的最大整数是A。</p>
+</li>
+<li><p>所有整数都能整除0，因为对于任何整数C， C ⋅ 0 = 0，即0 / C = 0。<br>所以我们得出A必然能整除0。</p>
+</li>
+<li><p>能同时整除A和0的最大数就是A。</p>
+<p>同理可以证明 <strong>GCD(0,B)=B</strong>。</p>
+<p>为了证明 **GCD(A,B)=GCD(B,R)**，我们首先需要知道 **GCD(A,B)=GCD(B,A-B)**。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/img/euclidean/1.png" alt="GCD(A,B)=GCD(B,A-B)"></p>
+</li>
+</ul>
+<p>假设我们有三个整数 <strong>A</strong>，<strong>B</strong> 和 <strong>C</strong> 而且 <strong>A-B=C</strong>。</p>
+<p><strong>证明GCD(A,B)可以整除C</strong></p>
+<p>由定义可知，GCD(A,B)可以整除A。因此A必然是GCD(A,B)的倍数，我们假设 X⋅GCD(A,B)=A，X为整数。</p>
+<p>由定义可知，GCD(A,B)可以整除B。因此B必然是GCD(A,B)的倍数，我们假设 Y⋅GCD(A,B)=B，Y为整数。</p>
+<p>A-B=C 可以得出：</p>
+<ul>
+<li>X⋅GCD(A,B) - Y⋅GCD(A,B) = C</li>
+<li>(X - Y)⋅GCD(A,B) = C</li>
+<li>C / GCD(A,B) = X - Y</li>
+</ul>
+<p>所以我们可得出GCD(A,B)可以整除C。</p>
+<p>此证明的图示如下：</p>
+<p> <img src="https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/img/euclidean/2.png" alt="X⋅GCD(A,B) - Y⋅GCD(A,B) = C"></p>
+<p> <strong>证明GCD(B,C)可以整除A</strong></p>
+<p>由定义可知，GCD(B,C)可以整除B。因此B必然是GCD(B,C)的倍数，我们假设 M⋅GCD(B,C)=B，M为整数。</p>
+<p>由定义可知，GCD(B,C)可以整除C。因此C必然是GCD(B,C)的倍数，我们假设 N⋅GCD(B,C)=C，N为整数。</p>
+<p>A-B=C 可以得出：</p>
+<ul>
+<li>B+C=A</li>
+<li>M⋅GCD(B,C) + N⋅GCD(B,C) = A</li>
+<li>A / GCD(B,C) = M + N</li>
+</ul>
+<p>所以我们可以得出GCD(B,C)可以整除A。</p>
+<p>此证明的图示如下：</p>
+<p> <img src="https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/img/euclidean/3.png" alt="(M + N)⋅GCD(B,C) = A"></p>
+<p><strong>下面证明GCD(A,B)=GCD(A,A-B)</strong></p>
+<ul>
+<li>由定义可知，GCD(A,B)可以整除B。</li>
+<li>我们已经证明GCD(A,B)可以整除C。</li>
+<li>因为GCD(A,B)可以整除B和C，所以GCD(A,B)是B和C的公约数。</li>
+</ul>
+<p><strong>GCD(A,B)必然小于等于GCD(B,C)，因为GCD(B,C)是B和C的最大公约数。</strong></p>
+<ul>
+<li>由定义可知，GCD(B,C)可以整除B。</li>
+<li>我们已经证明GCD(B,C)可以整除A。</li>
+<li>因为GCD(B,C)可以整除A和B，所以GCD(B,C)是A和B的公约数。</li>
+</ul>
+<p><strong>GCD(B,C)必然小于等于GCD(A,B)，因为GCD(A,B)是A和B的最大公约数。</strong></p>
+<p>由于GCD(A,B)小于等于GCD(B,C)且GCD(B,C)小于等于GCD(A,B)，我们可以得出：</p>
+<p><strong>GCD(A,B)=GCD(B,C)</strong></p>
+<p>即：</p>
+<p><strong>GCD(A,B)=GCD(B,A-B)</strong></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/img/euclidean/1.png" alt="GCD(A,B)=GCD(B,A-B)"></p>
+<p> <strong>下面证明GCD(A,B) = GCD(B,R)</strong></p>
+<p>我们已经证明GCD(A,B)=GCD(B,A-B)。</p>
+<p>因为括号内数字的顺序与最大公约数无关，所以我们也可以这样写GCD(A,B)=GCD(A-B,B)。</p>
+<p>我们可以重复使用GCD(A,B)=GCD(A-B,B)得到以下的式子：</p>
+<p>GCD(A,B)=GCD(A-B,B)=GCD(A-2B,B)=GCD(A-3B,B)=…=GCD(A-Q⋅B,B)</p>
+<p>其中A= B⋅Q + R 即 A-Q⋅B=R</p>
+<p>因此 **GCD(A,B)=GCD(R,B)**，</p>
+<p>顺序无关所以：</p>
+<p><strong>GCD(A,B)=GCD(B,R)</strong></p>
+<hr>
+<h2 id="原文地址"><a href="#原文地址" class="headerlink" title="原文地址"></a>原文地址</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm">可汗学院-欧几里得算法</a></li>
+</ul>
+
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+<button type="button" class="nes-btn is-success scroll-btn">
+<span><</s>
+</button>
+    <div class="footer" id="footer">
+	<div id="app"></div>
+    <p>Copyright © Vine 2021.Theme by <a class="flink" target="_blank" rel="noopener" href="https://github.com/journey-ad/hexo-theme-geek">Geek</a>.
+		</br>
+		<label>
+			<input type="radio" class="nes-radio" id="update_style_b" name="switch" color_mode="black" />
+			<span>Black</span>
+		</label>
+		<label>
+			<input type="radio" class="nes-radio" id="update_style_w" name="switch" color_mode="white" />
+			<span>White</span>
+		</label>
+		
+		
+<script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+<script>
+  let player = new cplayer({
+    element: document.getElementById('app'),
+    playlist: [
+      {
+        src: 'https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/bgm/Start%20the%20Adventure.mp3',
+        poster: 'https://cdn.jsdelivr.net/gh/vinelin/blog-resources@master/theme/img/music_png.png',
+        name: 'Start the Adventure',
+        artist: 'Nexon',
+        lyric: '',
+        sublyric: '',
+      }
+    ],
+	volume: 0.3,
+	dropDownMenuMode: 'bottom',
+  })
+</script>	
+</p>
+
+
+</div>
+<input type="hidden" id="web_style" value="white">
+<input type="hidden" id="valine_appid" value="mtn0Lvro9W02R6bHRhiFCszQ-gzGzoHsz">
+<input type="hidden" id="valine_appKey" value="TIDLxR2BG5wKroApzi4lcVRy">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+    color: #698fca;
+}
+
+.v .vlist .vcard .vhead .vsys {
+    color: #3a3e4a;
+}
+
+.v .vlist .vcard .vh .vmeta .vat {
+    color: #638fd5;
+}
+
+.v .vlist .vcard .vhead .vnick {
+    color: #6ba1ff;
+}
+
+.v a {
+    color: #8696b1;
+}
+
+.v .vlist .vcard .vhead .vnick:hover {
+    color: #669bfc;
+}
+</style>
+	
+</body>
+
+</html>
