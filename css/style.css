@@ -2,10 +2,7 @@
   font-family: ZpixOnline;
   src: url("https://cdn.jsdelivr.net/gh/vinelin/blog-resource@master/zpix.woff2?zpix--online"),;
 }
-@font-face {
-  font-family: ZpixLocal;
-  src: url("zpix-font/zpix.woff2?zpix--local");
-}
+
 .theme-black body {
   color: #fff;
   background-color: #3a3e4a;
